@@ -1,30 +1,27 @@
 "use client";
-import getCourse from "@/app/services/getCourse";
 import { Course } from "@/models/Course";
-import { useState } from "react";
 
-const DropDownCourse = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const date = new Date();
-  const [selected, setSelected] = useState<Course>({
-    name: "Course Name",
-    code: "",
-    createdAt: "",
-  });
+interface DropDownCourseProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  selected: Course;
+  setSelected: (selected: Course) => void;
+  courses: Course[];
+}
 
-  const courses = getCourse();
-
-  const handleSelect = (itemName: string, itemCode: string) => {
-    setSelected({ name: itemName, code: itemCode, createdAt: date.toString() });
-    setOpen(false);
-  };
-
+const DropDownCourse = ({
+  open,
+  setOpen,
+  selected,
+  setSelected,
+  courses,
+}: DropDownCourseProps) => {
   return (
     <div className="relative inline-block text-left">
       <div>
         <button
           type="button"
-          className="inline-flex w-72 justify-center gap-x-1.5 bg-green-1 hover:bg-green-2 px-3 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+          className="inline-flex lg:w-80 sm:w-60 w-full h-11 justify-center gap-x-1.5 bg-green-1 hover:bg-green-2 px-12 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
@@ -47,7 +44,7 @@ const DropDownCourse = () => {
       </div>
 
       <div
-        className={`w-72 absolute right-0 z-10 mt-2 origin-top-right bg-white focus:outline-none shadow-[2px_2px_0px_rgba(0,0,0,1)] border-black border-2 divide-y divide-black ${
+        className={`w-full absolute right-0 z-10 mt-2 origin-top-right bg-white focus:outline-none shadow-[2px_2px_0px_rgba(0,0,0,1)] border-black border-2 divide-y divide-black ${
           open ? "" : "hidden"
         }`}
         role="menu"
@@ -61,7 +58,7 @@ const DropDownCourse = () => {
               role="menuitem"
               id="menu-item-0"
               key={item.code}
-              onClick={() => handleSelect(item.name, item.code)}
+              onClick={() => setSelected(item)}
             >
               {item.name}
             </div>

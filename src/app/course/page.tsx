@@ -8,10 +8,10 @@ import formatDate from "@/utils/formatDate";
 import { useEffect, useState } from "react";
 import { IoAddOutline } from "react-icons/io5";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import getCourse from "../services/getCourse";
+import getCourse from "../../services/getCourse";
 import { Course } from "@/models/Course";
-import addCourse, { AddCourse } from "../services/addCourse";
-import deleteCourse from "../services/deleteCourse";
+import addCourse, { AddCourse } from "../../services/addCourse";
+import deleteCourse from "../../services/deleteCourse";
 import { useToast } from "@/components/Toast";
 
 const CoursePage = () => {
@@ -28,10 +28,8 @@ const CoursePage = () => {
     setCourses(getCourse());
   }, [isOpen, trigger]);
 
-  const handleAdd = async () => {
-    
-    if (formCourse.name === "" || formCourse.encrypted === "") return showToast("Please fill all fields", "info");
-    if (courses.some((item) => item.name === formCourse.name)) return showToast("Course already exists", "error");
+  const handleAdd = async () => {    
+    if (formCourse.name === "" || formCourse.encrypted === "") return showToast("Please fill all fields", "info");    
     try {
       const newCourse = await addCourse(formCourse);
       if(newCourse instanceof Error) return showToast(newCourse.message, "error");
@@ -49,13 +47,14 @@ const CoursePage = () => {
 
   const handleDelete = (code: string) => {
     deleteCourse(code);
+    showToast("Course Deleted", "info");
     setTrigger(trigger + 1);
   };
 
   return (
     <>
       <div className="w-full h-full flex flex-col gap-8">
-        <div className="w-full justify-between flex flex-row items-center">
+        <div className="w-full justify-between flex flex-col md:flex-row gap-4 md:gap-0">
           <h1 className="text-3xl font-bold">Manage Course</h1>
           <ButtonGreen onClick={() => setIsOpen(true)}>
             <div className="flex flex-row gap-2 items-center">
@@ -63,7 +62,7 @@ const CoursePage = () => {
             </div>
           </ButtonGreen>
         </div>
-        <div className="w-full border-2 border-black rounded-md bg-purple-1 p-8 flex flex-col gap-8">
+        <div className="w-full h-fit border-2 border-black rounded-md bg-purple-1 p-8 flex flex-col gap-8 overflow-x-scroll hide-scroll">
           <Table>
             <THead>
               <Trh>

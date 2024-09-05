@@ -26,7 +26,7 @@ const Modal = ({
         onClick={(e) => e.stopPropagation()}
       >
         <div>
-          <h1 className="text-2xl mb-4">{title}</h1>
+          <h1 className="text-2xl mb-4 text-center">{title}</h1>
           <div className="w-full py-4">{children}</div>
           {!onSubmitText && 
           <div className="flex space-x-2 mx-auto w-32 mt-8">

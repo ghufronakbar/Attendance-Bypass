@@ -29,15 +29,15 @@ type ToastProps = {
   index: number;
 };
 
-const Toast: React.FC<ToastProps> = ({ text, status, onClose, index }) => {
+const Toast: React.FC<ToastProps> = ({ text, status, onClose }) => {
   const iconClasses = "mr-3 text-xl";
 
   const statusClasses = classNames(
     "flex items-center p-4 border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] mb-4 transition-transform duration-300 transform-gpu",
     {
-      "bg-green-500 text-black": status === "success",
-      "bg-red-500 text-black": status === "error",
-      "bg-yellow-300 text-black": status === "info",
+      "bg-green-1 text-black": status === "success",
+      "bg-red-1 text-black": status === "error",
+      "bg-yellow-1 text-black": status === "info",
     },
     "animate-bounce-in-right"
   );
@@ -51,7 +51,7 @@ const Toast: React.FC<ToastProps> = ({ text, status, onClose, index }) => {
   return (
     <div
       className={statusClasses}
-      style={{ transform: `translateY(${index * 100}%)` }}
+      // style={{ transform: `translateY(${index * 100}%)` }}
     >
       {icon}
       <div className="flex-1 font-bold">{text}</div>
@@ -59,6 +59,7 @@ const Toast: React.FC<ToastProps> = ({ text, status, onClose, index }) => {
         onClick={onClose}
         className="ml-4 text-black hover:text-gray-700 transition-colors"
       >
+        {}
         <AiOutlineClose />
       </button>
     </div>
@@ -93,7 +94,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="fixed bottom-6 right-6 z-50 space-y-2">
+      <div className="fixed bottom-6 right-6 z-50 ">
         {toasts.map((toast, index) => (
           <Toast
             key={toast.id}

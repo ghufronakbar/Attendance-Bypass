@@ -1,5 +1,5 @@
 import Cookie from "js-cookie";
-import { STORAGE_KEY } from "@/constant";
+import { EXPIRES, STORAGE_KEY } from "@/constant";
 import getCourse from "./getCourse";
 
 const deleteCourse = (code: string) => {
@@ -9,10 +9,14 @@ const deleteCourse = (code: string) => {
     if (find) {
       const index = courses.indexOf(find);
       courses.splice(index, 1);
-      Cookie.set(STORAGE_KEY, JSON.stringify(courses));
+      Cookie.set(STORAGE_KEY, JSON.stringify(courses), {
+        expires: EXPIRES,
+      });
     }
   } else {
-    Cookie.set(STORAGE_KEY, JSON.stringify([]));
+    Cookie.set(STORAGE_KEY, JSON.stringify([]), {
+      expires: EXPIRES,
+    });
   }
 };
 

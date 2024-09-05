@@ -1,27 +1,32 @@
 "use client";
-import { useState } from "react";
 
-const DropDownWeek = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<number|null>(null);
+interface DropDownWeekProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  selected: number;
+  setSelected: (selected: number) => void;
+  weeks: number[];
+}
 
-  const handleSelect = (itemWeek: number) => {
-    setSelected(itemWeek);
-    setOpen(false);
-  };
-
+const DropDownWeek = ({
+  open,
+  setOpen,
+  selected,
+  setSelected,
+  weeks,
+}: DropDownWeekProps) => {
   return (
     <div className="relative inline-block text-left">
       <div>
         <button
           type="button"
-          className="inline-flex w-72 justify-center gap-x-1.5 bg-green-1 hover:bg-green-2 px-3 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+          className="inline-flex lg:w-80 sm:w-60 w-fit justify-center gap-x-1.5 bg-green-1 hover:bg-green-2 px-12 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
           onClick={() => setOpen(!open)}
         >
-          {selected? `Week ${selected}` : "Select Week"}
+          {selected ? `Week ${selected}` : "Select Week"}
           <svg
             className="mt-1 h-5 w-5"
             viewBox="0 0 20 20"
@@ -38,7 +43,7 @@ const DropDownWeek = () => {
       </div>
 
       <div
-        className={`w-72 absolute right-0 z-10 mt-2 origin-top-right bg-white focus:outline-none shadow-[2px_2px_0px_rgba(0,0,0,1)] border-black border-2 divide-y divide-black ${
+        className={`w-full absolute right-0 z-10 mt-2 origin-top-right bg-white focus:outline-none shadow-[2px_2px_0px_rgba(0,0,0,1)] border-black border-2 divide-y divide-black ${
           open ? "" : "hidden"
         }`}
         role="menu"
@@ -46,13 +51,13 @@ const DropDownWeek = () => {
         aria-labelledby="menu-button"
       >
         <div role="none">
-          {Array.from({ length: 14 }, (_, i) => i + 1).map((item) => (
+          {weeks.map((item) => (
             <div
               className="block px-4 py-2 text-sm border-black border-b-2 hover:bg-green-2 hover:font-medium cursor-pointer"
               role="menuitem"
               id="menu-item-0"
               key={item}
-              onClick={() => handleSelect(item)}
+              onClick={() => setSelected(item)}
             >
               Week {item}
             </div>
