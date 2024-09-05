@@ -15,7 +15,7 @@ const DropDownWeek = () => {
       <div>
         <button
           type="button"
-          className="inline-flex w-72 justify-center gap-x-1.5 bg-[#B8FF9F] hover:bg-[#99fc77] px-3 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+          className="inline-flex w-72 justify-center gap-x-1.5 bg-green-1 hover:bg-green-2 px-3 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
@@ -48,7 +48,7 @@ const DropDownWeek = () => {
         <div role="none">
           {Array.from({ length: 14 }, (_, i) => i + 1).map((item) => (
             <div
-              className="block px-4 py-2 text-sm border-black border-b-2 hover:bg-[#B8FF9F] hover:font-medium cursor-pointer"
+              className="block px-4 py-2 text-sm border-black border-b-2 hover:bg-green-2 hover:font-medium cursor-pointer"
               role="menuitem"
               id="menu-item-0"
               key={item}

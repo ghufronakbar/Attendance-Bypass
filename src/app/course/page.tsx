@@ -12,31 +12,37 @@ import getCourse from "../services/getCourse";
 import { Course } from "@/models/Course";
 import addCourse, { AddCourse } from "../services/addCourse";
 import deleteCourse from "../services/deleteCourse";
+import { useToast } from "@/components/Toast";
 
 const CoursePage = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [courses, setCourses] = useState<Course[]>([]);
   const [trigger, setTrigger] = useState<number>(0);
+  const { showToast } = useToast();
   const [formCourse, setFormCourse] = useState<AddCourse>({
     name: "",
     encrypted: "",
   });
-  
+
   useEffect(() => {
     setCourses(getCourse());
   }, [isOpen, trigger]);
 
-  const handleAdd = () => {
-    if (formCourse.name === "" || formCourse.encrypted === "") return;
-    if (courses.some((item) => item.name === formCourse.name)) return;
+  const handleAdd = async () => {
+    
+    if (formCourse.name === "" || formCourse.encrypted === "") return showToast("Please fill all fields", "info");
+    if (courses.some((item) => item.name === formCourse.name)) return showToast("Course already exists", "error");
     try {
-        addCourse(formCourse);
-        setFormCourse({
-          name: "",
-          encrypted: "",
-        });
+      const newCourse = await addCourse(formCourse);
+      if(newCourse instanceof Error) return showToast(newCourse.message, "error");
+      setFormCourse({
+        name: "",
+        encrypted: "",
+      });
+      showToast("Course Added", "success");
     } catch (error) {
-        console.log(error);        
+      showToast("Failed to add course", "error");
+      console.log(error);
     }
     setIsOpen(false);
   };
@@ -57,7 +63,7 @@ const CoursePage = () => {
             </div>
           </ButtonGreen>
         </div>
-        <div className="w-full border-2 border-black rounded-md bg-[#A5B4FB] p-8 flex flex-col gap-8">
+        <div className="w-full border-2 border-black rounded-md bg-purple-1 p-8 flex flex-col gap-8">
           <Table>
             <THead>
               <Trh>
@@ -81,7 +87,11 @@ const CoursePage = () => {
                   <Td>{item.code}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
                   <Td>
-                    <ButtonRed onClick={()=>{handleDelete(item.code)}}>
+                    <ButtonRed
+                      onClick={() => {
+                        handleDelete(item.code);
+                      }}
+                    >
                       <RiDeleteBin6Fill />
                     </ButtonRed>
                   </Td>
@@ -106,7 +116,7 @@ const CoursePage = () => {
               Course Name
             </label>
             <input
-              className="w-96 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+              className="w-96 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
               type="text"
               placeholder="Object Oriented Programming"
               value={formCourse.name}
@@ -121,7 +131,7 @@ const CoursePage = () => {
               Encyrpted Code
             </label>
             <input
-              className="w-96 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+              className="w-96 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
               type="text"
               placeholder="U2FsdGVkX18NSX+RL7twPs/HhWOntnmYb7HpRyJ9Fy2ZHMNPVflwKd5hWK5KrT1v"
               value={formCourse.encrypted}

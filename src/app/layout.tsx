@@ -3,6 +3,7 @@ import "./globals.css";
 import { Archivo } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
+import { ToastProvider } from "@/components/Toast";
 
 const archivo = Archivo({
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -22,13 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${archivo.className} antialiased`}>
-        <div className="flex h-screen">
-          <Navbar />
-          <Sidebar />
-          <div className="flex-1 flex flex-col">
-            <div className="flex-1 overflow-auto py-32 px-16 text-black">{children}</div>
+        <ToastProvider>
+          <div className="flex h-screen">
+            <Navbar />
+            <Sidebar />
+            <div className="flex-1 flex flex-col">
+              <div className="flex-1 overflow-auto py-32 px-16 text-black">
+                {children}
+              </div>
+            </div>
           </div>
-        </div>
+        </ToastProvider>
       </body>
     </html>
   );

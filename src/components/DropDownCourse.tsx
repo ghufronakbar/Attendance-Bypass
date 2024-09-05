@@ -1,24 +1,7 @@
 "use client";
+import getCourse from "@/app/services/getCourse";
 import { Course } from "@/models/Course";
 import { useState } from "react";
-
-const dummyData: Course[] = [
-  {
-    name: "Course 1",
-    code: "C001",
-    createdAt: "2022-01-01",
-  },
-  {
-    name: "Course 2",
-    code: "C002",
-    createdAt: "2022-10-04",
-  },
-  {
-    name: "Course 3",
-    code: "C003",
-    createdAt: "2022-11-21",
-  },
-];
 
 const DropDownCourse = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -28,6 +11,8 @@ const DropDownCourse = () => {
     code: "",
     createdAt: "",
   });
+
+  const courses = getCourse();
 
   const handleSelect = (itemName: string, itemCode: string) => {
     setSelected({ name: itemName, code: itemCode, createdAt: date.toString() });
@@ -39,7 +24,7 @@ const DropDownCourse = () => {
       <div>
         <button
           type="button"
-          className="inline-flex w-72 justify-center gap-x-1.5 bg-[#B8FF9F] hover:bg-[#99fc77] px-3 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+          className="inline-flex w-72 justify-center gap-x-1.5 bg-green-1 hover:bg-green-2 px-3 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
@@ -70,9 +55,9 @@ const DropDownCourse = () => {
         aria-labelledby="menu-button"
       >
         <div role="none">
-          {dummyData.map((item) => (
+          {courses.map((item) => (
             <div
-              className="block px-4 py-2 text-sm border-black border-b-2 hover:bg-[#B8FF9F] hover:font-medium cursor-pointer"
+              className="block px-4 py-2 text-sm border-black border-b-2 hover:bg-green-2 hover:font-medium cursor-pointer"
               role="menuitem"
               id="menu-item-0"
               key={item.code}

@@ -9,13 +9,12 @@ export interface AddCourse {
   encrypted: string;
 }
 
-const addCourse = (course: AddCourse) => {
+const addCourse = async (course: AddCourse) : Promise<Error | boolean> => {
   console.log(course)
   const code = Cookie.get(STORAGE_KEY);
   const decrypted = getCourseCode(course.encrypted);
-  if (decrypted instanceof Error){
-    console.error(decrypted.message);
-    return
+  if (decrypted instanceof Error){    
+    return decrypted;
   };
   const newCourse: Course = {
     name: course.name,
@@ -27,12 +26,15 @@ const addCourse = (course: AddCourse) => {
       const courses = JSON.parse(code);
       courses.push(newCourse);
       Cookie.set(STORAGE_KEY, JSON.stringify(courses));
+      return true;
     } else {
       Cookie.set(STORAGE_KEY, JSON.stringify([newCourse]));
+      return true;
     }
   } catch (error) {
     console.error(error);
     Cookie.set(STORAGE_KEY, JSON.stringify([]));
+    return new Error("Failed to add course");
   }
 };
 

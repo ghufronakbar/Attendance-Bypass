@@ -6,7 +6,7 @@ interface ButtonProps {
 const ButtonBlue = ({ children, onClick }: ButtonProps) => {
   return (
     <button
-      className="w-fit h-12 border-black border-2 p-2.5 bg-[#A6FAFF] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF]"
+      className="w-fit h-12 border-black border-2 p-2.5 bg-blue-1 hover:bg-blue-2 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-blue-3"
       onClick={onClick}
     >
       {children}
