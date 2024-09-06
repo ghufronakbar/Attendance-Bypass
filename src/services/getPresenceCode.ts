@@ -3,15 +3,15 @@ import CryptoJS from "crypto-js";
 
 const date = new Date();
 /* 
-  Fungsi: getPresenceCode
-  Parameter:
-    - courseCode (string): Kode mata kuliah yang akan dienkripsi.
-    - meeting (number): Nomor pertemuan (harus antara 1 hingga 14).
-    - time (number): Durasi pertemuan dalam menit.
+  Function: getPresenceCode
+  Params:
+    - courseCode (string): Course code that got from getCourseCode.
+    - meeting (number): Meeting number (1-14).
+    - time (number): Time in minutes.
   
   Return:
-    - Jika parameter valid: Mengembalikan string terenkripsi yang berisi data kehadiran (course code, meeting number, tanggal, waktu mulai, dan waktu berakhir).
-    - Jika meeting number tidak valid: Mengembalikan `Error` dengan pesan "Invalid meeting number".
+    - If encryption is successful: Returns the meeting code <string>.
+    - If encryption fails: Returns an error <Error>.
 */
 export const getPresenceCode = async (
   courseCode: string,

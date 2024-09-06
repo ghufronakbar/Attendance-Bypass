@@ -52,7 +52,7 @@ const HomePage = () => {
           <div className="w-full md:w-[70%] flex flex-col gap-4">
             <h3 className="text-2xl">How to bypass my attendance?</h3>
             <p className="text-lg">Hi, welcome to my app</p>
-            <p>
+            <div>
               <p>
                 First, you have to register your course by using encrypted code
               </p>
@@ -61,7 +61,7 @@ const HomePage = () => {
                 you&apos;ve registered
               </p>
               <p>To get started, click on the button below!</p>
-            </p>
+            </div>
             <ButtonBlue className="px-8" onClick={handleStart}>
               Start
             </ButtonBlue>

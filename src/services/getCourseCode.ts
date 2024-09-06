@@ -2,13 +2,13 @@ import { SECRET_KEY } from "@/constant";
 import CryptoJS from "crypto-js";
 
 /* 
-  Fungsi: getCourseCode
-  Parameter:
-    - code (string): Ini adalah string terenkripsi yang berisi informasi tentang course.
+  Function: getCourseCode
+  Params:
+    - code (string): Encrypted string.
   
   Return:
-    - Jika dekripsi berhasil: Mengembalikan string yang merupakan kode mata kuliah (course code).
-    - Jika dekripsi gagal: Mengembalikan `Error` dengan pesan "Invalid code".
+    - If decryption is successful: Returns the course code <string>.
+    - If decryption fails: Returns an error <Error>.
 */
 const getCourseCode = (code: string): string | Error => {
   const decrypted = CryptoJS.AES.decrypt(code, SECRET_KEY);

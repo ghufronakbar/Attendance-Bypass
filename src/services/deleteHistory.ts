@@ -1,5 +1,4 @@
-import Cookie from "js-cookie";
-import { EXPIRES, HISTORY_KEY } from "@/constant";
+import { HISTORY_KEY } from "@/constant";
 import getHistory from "./getHistory";
 
 const deleteHistory = (code: string) => {
@@ -9,14 +8,10 @@ const deleteHistory = (code: string) => {
     if (find) {
       const index = histories.indexOf(find);
       histories.splice(index, 1);
-      Cookie.set(HISTORY_KEY, JSON.stringify(histories), {
-        expires: EXPIRES,
-      });
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(histories));
     }
   } else {
-    Cookie.set(HISTORY_KEY, JSON.stringify([]), {
-      expires: EXPIRES,
-    });
+    localStorage.setItem(HISTORY_KEY, JSON.stringify([]));
   }
 };
 

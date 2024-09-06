@@ -92,7 +92,7 @@ export default function RootLayout({
             <div className="w-full xl:min-h-[100vh] lg:min-h-[110vh] md:min-h-[120vh] sm:min-h-[160vh] min-h-[160vh] py-32 xl:px-16 lg:px-12 md:px-8 sm:px-8 px-4  text-black flex flex-col">
               {children}
               <span
-                className={`${archivo.className} antialiased text-center w-full text-sm text-black mt-20`}
+                className={`${archivo.className} antialiased text-center w-full text-sm text-black my-20`}
               >
                 Made with ❤️ by{" "}
                 <Link

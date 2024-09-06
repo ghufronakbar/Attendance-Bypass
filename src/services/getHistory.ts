@@ -1,24 +1,19 @@
 import { History } from "@/models/History";
-import Cookie from "js-cookie";
-import { EXPIRES, HISTORY_KEY } from "@/constant";
+import { HISTORY_KEY } from "@/constant";
 
 const getHistory = (): History[] => {
-  const code = Cookie.get(HISTORY_KEY);
+  const code = localStorage.getItem(HISTORY_KEY);
   try {
     if (code) {
       const data = JSON.parse(code);
       const reversedData = [...data].reverse();
       return reversedData;
     } else {
-      Cookie.set(HISTORY_KEY, JSON.stringify([]), {
-        expires: EXPIRES,
-      });
+      localStorage.setItem(HISTORY_KEY, JSON.stringify([]));
       return [];
     }
   } catch (error) {
-    Cookie.set(HISTORY_KEY, JSON.stringify([]), {
-      expires: EXPIRES,
-    });
+    localStorage.setItem(HISTORY_KEY, JSON.stringify([]));
     return [];
   }
 };

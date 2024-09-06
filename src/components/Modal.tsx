@@ -18,7 +18,7 @@ const Modal = ({
   if (!isVisible) return <></>;
   return (
     <div
-      className="w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-50 z-50"
+      className="w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-50 z-40"
       onClick={onClose}
     >
       <div

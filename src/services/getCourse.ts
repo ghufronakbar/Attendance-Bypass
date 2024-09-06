@@ -1,24 +1,19 @@
 import { Course } from "@/models/Course";
-import Cookie from "js-cookie";
-import { EXPIRES, STORAGE_KEY } from "@/constant";
+import { STORAGE_KEY } from "@/constant";
 
 const getCourse = (): Course[] => {
-  const code = Cookie.get(STORAGE_KEY);
+  const code = localStorage.getItem(STORAGE_KEY);
   try {
     if (code) {
       const data = JSON.parse(code);
       const reversedData = [...data].reverse();
       return reversedData;
     } else {
-      Cookie.set(STORAGE_KEY, JSON.stringify([]), {
-        expires: EXPIRES,
-      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
       return [];
     }
   } catch (error) {
-    Cookie.set(STORAGE_KEY, JSON.stringify([]), {
-      expires: EXPIRES,
-    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
     return [];
   }
 };
