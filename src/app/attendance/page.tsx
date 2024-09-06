@@ -4,7 +4,7 @@ import ButtonBlue from "@/components/ButtonBlue";
 import DropDownCourse from "@/components/DropDownCourse";
 import DropDownWeek from "@/components/DropDownWeek";
 import Modal from "@/components/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import getCourse from "../../services/getCourse";
 import { Course } from "@/models/Course";
 import { useToast } from "@/components/Toast";
@@ -19,6 +19,7 @@ const AttendancePage = () => {
   const [selectedWeek, setSelectedWeek] = useState<number>(0);
   const [isSelectCourse, setIsSelectCourse] = useState<boolean>(false);
   const [qrValue, setQrValue] = useState<string>("");
+  const [courses, setCourses] = useState<Course[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<Course>({
     name: "Select Course",
     code: "",
@@ -58,6 +59,10 @@ const AttendancePage = () => {
     showToast("Generating attendance", "success");
   };
 
+  useEffect(() => {
+    setCourses(getCourse());
+  }, []);
+
   return (
     <>
       <div className="w-full h-full flex flex-col gap-8">
@@ -69,7 +74,7 @@ const AttendancePage = () => {
                 Select Course
               </label>
               <DropDownCourse
-                courses={getCourse()}
+                courses={courses}
                 open={isSelectCourse}
                 setSelected={(selected: Course) => handleSelectCourse(selected)}
                 setOpen={() => setIsSelectCourse(!isSelectCourse)}
