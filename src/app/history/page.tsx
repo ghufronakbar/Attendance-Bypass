@@ -98,10 +98,12 @@ const HistoryPage = () => {
                   <Td>{item.name}</Td>
                   <Td>{item.meeting}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
-                  <Td>
+                  <Td >
+                    <div className={`w-fit h-fit border-black border-2 py-1 px-2 ${isNotExpired(item.createdAt, item.expiredTime) ? "bg-blue-1 hover:bg-blue-2":"bg-violet-1 hover:bg-violet-2"}  shadow-[3px_3px_0px_rgba(0,0,0,1)] mx-auto`}>
                     {isNotExpired(item.createdAt, item.expiredTime)
                       ? "Active"
                       : "Expired"}
+                      </div>
                   </Td>
                   <Td className="flex flex-row gap-2 justify-center">
                     <ButtonBlue

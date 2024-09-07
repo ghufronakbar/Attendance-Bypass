@@ -100,7 +100,7 @@ const AttendancePage = () => {
                 Expired In (minutes)
               </label>
               <input
-                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-11 border-black border-2 p-2.5 focus:outline-none shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-11 border-black border-2 p-2.5 focus:outline-none shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 "
                 type="number"
                 inputMode="numeric"
                 placeholder="60"
