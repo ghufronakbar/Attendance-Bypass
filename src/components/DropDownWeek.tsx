@@ -26,7 +26,9 @@ const DropDownWeek = ({
           aria-haspopup="true"
           onClick={() => setOpen(!open)}
         >
-          {selected ? `Week ${selected}` : "Select Week"}
+          <p className="line-clamp-1">
+            {selected ? `Week ${selected}` : "Select Week"}
+          </p>
           <svg
             className="mt-1 h-5 w-5"
             viewBox="0 0 20 20"

@@ -27,7 +27,7 @@ const DropDownCourse = ({
           aria-haspopup="true"
           onClick={() => setOpen(!open)}
         >
-          {selected.name}
+          <p className="line-clamp-1">{selected.name}</p>
           <svg
             className="mt-1 h-5 w-5"
             viewBox="0 0 20 20"
