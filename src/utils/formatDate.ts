@@ -1,7 +1,7 @@
 /**
  * 
- * @param dateString - Tanggal dalam format "YYYY-MM-DDTHH:mm:ss.000Z"
- * @returns String dengan format "Dayname, DD MMMM YYYY"
+ * @param dateString - Date in format <string> "YYYY-MM-DDTHH:mm:ss.000Z"
+ * @returns Date in format <string> "Dayname, DD MMMM YYYY"
  */
 const formatDate = (dateString: string) => {
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

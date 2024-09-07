@@ -62,7 +62,7 @@ const CoursePage = () => {
             </div>
           </ButtonGreen>
         </div>
-        <div className="w-full h-fit border-2 border-black rounded-md bg-purple-1 p-8 flex flex-col gap-8 overflow-x-scroll hide-scroll">
+        <div className="w-full h-fit border-2 border-black rounded-md bg-purple-1 p-8 flex flex-col gap-8 overflow-x-auto hide-scroll">        
           <Table>
             <THead>
               <Trh>
@@ -115,7 +115,7 @@ const CoursePage = () => {
               Course Name
             </label>
             <input
-              className="w-full border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+              className="w-full border-black border-2 p-2.5 focus:outline-none shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
               type="text"
               placeholder="Object Oriented Programming"
               value={formCourse.name}
@@ -130,7 +130,7 @@ const CoursePage = () => {
               Encyrpted Code
             </label>
             <input
-              className="w-full border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+              className="w-full border-black border-2 p-2.5 focus:outline-none shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
               type="text"
               placeholder="U2FsdGVkX18NSX+RL7twPs/HhWOntnmYb7HpRyJ9Fy2ZHMNPVflwKd5hWK5KrT1v"
               value={formCourse.encrypted}

@@ -29,19 +29,19 @@ const Modal = ({
           <h1 className="text-2xl mb-4 text-center">{title}</h1>
           <div className="w-full py-4">{children}</div>
           {!onSubmitText && 
-          <div className="flex space-x-2 mx-auto w-32 mt-8">
-            <button className="h-12 border-2 p-2.5 bg-blue-1 hover:bg-blue-2 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-blue-3 rounded-full mx-auto" onClick={onClose}>
+          <div className="flex space-x-2 mx-auto w-32">
+            <button className="h-12 border-2 p-2.5 bg-blue-1 hover:bg-blue-2 shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-blue-3 rounded-full mx-auto" onClick={onClose}>
               Close
             </button>
             </div>
           }
             {onSubmitText && (
-              <div className="flex space-x-2 mx-auto w-32 mt-8">
+              <div className="flex space-x-2 mx-auto w-32">
                <button className="text-base mx-auto" onClick={onClose}>
                Close
              </button>
               <button
-                className="h-12 border-black border-2 p-2.5 bg-blue-1 hover:bg-blue-2 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-blue-3 rounded-full"
+                className="h-12 border-black border-2 p-2.5 bg-blue-1 hover:bg-blue-2 shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-blue-3 rounded-full"
                 onClick={(e) => {
                   e.stopPropagation();
                   onSubmit && onSubmit();
@@ -50,8 +50,7 @@ const Modal = ({
                 {onSubmitText}
               </button>
             </div>
-            )}
-          
+            )}          
         </div>
       </div>
     </div>

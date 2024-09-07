@@ -20,7 +20,7 @@ const DropDownWeek = ({
       <div>
         <button
           type="button"
-          className="inline-flex lg:w-80 sm:w-60 w-fit justify-center gap-x-1.5 bg-green-1 hover:bg-green-2 px-12 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+          className="inline-flex lg:w-80 sm:w-60 w-fit justify-center gap-x-1.5 bg-green-1 hover:bg-green-2 px-12 py-2 border-black border-2 focus:outline-none shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
@@ -43,7 +43,7 @@ const DropDownWeek = ({
       </div>
 
       <div
-        className={`w-full absolute right-0 z-10 mt-2 origin-top-right bg-white focus:outline-none shadow-[2px_2px_0px_rgba(0,0,0,1)] border-black border-2 divide-y divide-black ${
+        className={`w-full max-h-40 overflow-y-auto hide-scroll absolute right-0 z-10 mt-2 origin-top-right bg-white focus:outline-none shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] border-black border-2 divide-y divide-black ${
           open ? "" : "hidden"
         }`}
         role="menu"

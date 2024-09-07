@@ -78,7 +78,7 @@ const HomePage = () => {
         </div>
       </div>
       {isLoading && (
-        <div className="w-screen h-screen fixed top-0 left-0 flex justify-center items-end py-20 z-50">
+        <div className="w-screen h-screen fixed top-0 left-0 flex justify-center items-end py-20 z-50 bg-black/50">
           <ProgressBar currentValue={progress} color="red" />
         </div>
       )}

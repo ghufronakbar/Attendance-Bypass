@@ -3,14 +3,13 @@
 import ButtonBlue from "@/components/ButtonBlue";
 import DropDownCourse from "@/components/DropDownCourse";
 import DropDownWeek from "@/components/DropDownWeek";
-import Modal from "@/components/Modal";
 import { useEffect, useState } from "react";
 import getCourse from "../../services/getCourse";
 import { Course } from "@/models/Course";
 import { useToast } from "@/components/Toast";
-import QRCode from "react-qr-code";
 import { getPresenceCode } from "../../services/getPresenceCode";
 import addHistory from "@/services/addHistory";
+import ModalQR from "@/components/ModalQR";
 
 const AttendancePage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -18,7 +17,7 @@ const AttendancePage = () => {
   const [isSelectWeek, setIsSelectWeek] = useState<boolean>(false);
   const [selectedWeek, setSelectedWeek] = useState<number>(0);
   const [isSelectCourse, setIsSelectCourse] = useState<boolean>(false);
-  const [qrValue, setQrValue] = useState<string>("");
+  const [code, setCode] = useState<string>("");
   const [courses, setCourses] = useState<Course[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<Course>({
     name: "Select Course",
@@ -40,6 +39,7 @@ const AttendancePage = () => {
     if (selectedCourse.code === "")
       return showToast("Please select course", "info");
     if (selectedWeek === 0) return showToast("Please select week", "info");
+    if(expiredIn === 0) return showToast("Expired in must be more than 0", "info");
     const getQr = await getPresenceCode(
       selectedCourse.code,
       selectedWeek,
@@ -54,7 +54,7 @@ const AttendancePage = () => {
       expiredTime: expiredIn,
     });
     if (addToHistory instanceof Error) return showToast(addToHistory.message, "error");
-    setQrValue(getQr);
+    setCode(getQr);
     setShowModal(true);
     showToast("Generating attendance", "success");
   };
@@ -100,7 +100,7 @@ const AttendancePage = () => {
                 Expired In (minutes)
               </label>
               <input
-                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-11 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-11 border-black border-2 p-2.5 focus:outline-none shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-violet-1 active:shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                 type="number"
                 inputMode="numeric"
                 placeholder="60"
@@ -119,20 +119,14 @@ const AttendancePage = () => {
           </ButtonBlue>
         </div>
       </div>
-      <Modal
-        isVisible={showModal}
-        onClose={() => {
-          setShowModal(false);
-        }}
-        title="Attendace Created"
-      >
-        <div className="w-full h-full flex flex-col p-4">
-          <QRCode value={qrValue} className="self-center" />
-          <span className="text-lg mt-2 self-center">
-            {selectedCourse.name} - Week {selectedWeek}
-          </span>
-        </div>
-      </Modal>
+      <ModalQR
+      isVisible={showModal}
+      onClose={() => setShowModal(false)}
+      courseName={selectedCourse.name}
+      title={`Attendance for ${selectedCourse.name} - Week ${selectedWeek}`}
+      week={selectedWeek}      
+      code={code}
+      />
     </>
   );
 };

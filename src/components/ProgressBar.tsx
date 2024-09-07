@@ -28,13 +28,13 @@ const ProgressBar = ({
   return (
     <div
       className={classNames(
-        "w-72 md:w-full max-w-md border-black border-2 focus:outline-none h-9 overflow-hidden shadow-[2px_2px_0px_rgba(0,0,0,1)] bg-white",
+        "w-72 md:w-full max-w-md border-black border-2 focus:outline-none h-9 overflow-hidden shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] bg-white",
         { "rounded-none": rounded === "none" },
         { "rounded-md": rounded === "md" },
         { "rounded-full": rounded === "full" },
-        { "shadow-[2px_2px_0px_rgba(0,0,0,1)]": !disabled },
+        { "shadow-[3px_3px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]": !disabled },
         {
-          "border-[#727272] bg-[#D4D4D4] text-[#676767] hover:bg-[#D4D4D4] hover:shadow-none active:bg-[#D4D4D4]":
+          "border-[#727272] bg-[#D4D4D4] text-[#676767] hover:bg-[#D4D4D4] shadow-none active:bg-[#D4D4D4]":
             disabled,
         },
         className
