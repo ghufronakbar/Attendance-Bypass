@@ -22,15 +22,15 @@ const Modal = ({
       onClick={onClose}
     >
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 xl:w-[40vw] lg:w-[60vw] md:w-[80vw] sm:w-[90vw] w-[95vw] px-4 py-8 bg-white border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] grid place-content-center"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 xl:w-[40vw] lg:w-[60vw] md:w-[80vw] sm:w-[90vw] w-[95vw] px-4 py-8 bg-white border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] "
         onClick={(e) => e.stopPropagation()}
       >
-        <div>
+        <div className="w-full">
           <h1 className="text-2xl mb-4 text-center">{title}</h1>
           <div className="w-full py-4">{children}</div>
           {!onSubmitText && 
           <div className="flex space-x-2 mx-auto w-32 mt-8">
-            <button className="h-12 border-black border-2 p-2.5 bg-blue-1 hover:bg-blue-2 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-blue-3 rounded-full mx-auto" onClick={onClose}>
+            <button className="h-12 border-2 p-2.5 bg-blue-1 hover:bg-blue-2 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-blue-3 rounded-full mx-auto" onClick={onClose}>
               Close
             </button>
             </div>
