@@ -13,7 +13,7 @@ import ModalQR from "@/components/ModalQR";
 
 const AttendancePage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [expiredIn, setExpiredIn] = useState<number>(60);
+  const [expiredIn, setExpiredIn] = useState<number>(9999);
   const [isSelectWeek, setIsSelectWeek] = useState<boolean>(false);
   const [selectedWeek, setSelectedWeek] = useState<number>(0);
   const [isSelectCourse, setIsSelectCourse] = useState<boolean>(false);
@@ -39,12 +39,9 @@ const AttendancePage = () => {
     if (selectedCourse.code === "")
       return showToast("Please select course", "info");
     if (selectedWeek === 0) return showToast("Please select week", "info");
-    if(expiredIn === 0) return showToast("Expired in must be more than 0", "info");
-    const getQr = await getPresenceCode(
-      selectedCourse.code,
-      selectedWeek,
-      expiredIn
-    );
+    if (expiredIn === 0)
+      return showToast("Expired in must be more than 0", "info");
+    const getQr = await getPresenceCode(selectedCourse.code, selectedWeek);
     if (getQr instanceof Error) return showToast(getQr.message, "error");
     const addToHistory = await addHistory({
       name: selectedCourse.name,
@@ -53,7 +50,8 @@ const AttendancePage = () => {
       createdAt: new Date().toISOString(),
       expiredTime: expiredIn,
     });
-    if (addToHistory instanceof Error) return showToast(addToHistory.message, "error");
+    if (addToHistory instanceof Error)
+      return showToast(addToHistory.message, "error");
     setCode(getQr);
     setShowModal(true);
     showToast("Generating attendance", "success");
@@ -105,6 +103,7 @@ const AttendancePage = () => {
                 inputMode="numeric"
                 placeholder="60"
                 value={expiredIn}
+                disabled
                 onChange={(e) => setExpiredIn(Number(e.target.value))}
               />
             </div>
@@ -120,12 +119,12 @@ const AttendancePage = () => {
         </div>
       </div>
       <ModalQR
-      isVisible={showModal}
-      onClose={() => setShowModal(false)}
-      courseName={selectedCourse.name}
-      title={`Attendance for ${selectedCourse.name} - Week ${selectedWeek}`}
-      week={selectedWeek}      
-      code={code}
+        isVisible={showModal}
+        onClose={() => setShowModal(false)}
+        courseName={selectedCourse.name}
+        title={`Attendance for ${selectedCourse.name} - Week ${selectedWeek}`}
+        week={selectedWeek}
+        code={code}
       />
     </>
   );

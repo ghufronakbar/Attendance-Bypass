@@ -1,9 +1,8 @@
 import { SECRET_KEY } from "@/constant";
 import CryptoJS from "crypto-js";
 
-const date = new Date();
 /* 
-  Function: getPresenceCode
+Function: getPresenceCode
   Params:
     - courseCode (string): Course code that got from getCourseCode.
     - meeting (number): Meeting number (1-14).
@@ -12,12 +11,12 @@ const date = new Date();
   Return:
     - If encryption is successful: Returns the meeting code <string>.
     - If encryption fails: Returns an error <Error>.
-*/
+    */
 export const getPresenceCode = async (
   courseCode: string,
-  meeting: number,
-  time: number
+  meeting: number
 ): Promise<string | Error> => {
+  const date = new Date();
   if (meeting < 1 || meeting > 14) {
     return new Error("Invalid meeting number");
   }
@@ -32,26 +31,10 @@ export const getPresenceCode = async (
     );
   };
 
-  const timeStart = (): string => {
-    return (
-      date.getHours().toString().padStart(2, "0") +
-      ":" +
-      date.getMinutes().toString().padStart(2, "0")
-    );
-  };
+  console.log(dateNow());
 
-  const timeEnd = (): string => {
-    date.setMinutes(date.getMinutes() + time);
-    return (
-      date.getHours().toString().padStart(2, "0") +
-      ":" +
-      date.getMinutes().toString().padStart(2, "0")
-    );
-  };
-
-  const dataToEncrypt = `${courseCode},${meeting},${dateNow()},${timeStart()},${timeEnd()}`;
+  const dataToEncrypt = `${courseCode},${meeting},${dateNow()},00:01,23:59`;
   const encrypted = CryptoJS.AES.encrypt(dataToEncrypt, SECRET_KEY);
   const encryptedString = encrypted.toString();
-
   return encryptedString;
 };
